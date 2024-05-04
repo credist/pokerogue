@@ -2237,6 +2237,14 @@ export class AuraWheelTypeAttr extends VariableMoveTypeAttr {
   }
 }
 
+export class RevelationDanceTypeAttr extends VariableMoveTypeAttr {
+  apply(user: Pokemon, target: Pokemon, move: Move, args: any[]): boolean {
+    const type = (args[0] as Utils.IntegerHolder);
+    type.value = user.getTypes(true, false)[0];
+    return true;
+  }
+}
+
 export class RagingBullTypeAttr extends VariableMoveTypeAttr {
   apply(user: Pokemon, target: Pokemon, move: Move, args: any[]): boolean {
     if ([user.species.speciesId, user.fusionSpecies?.speciesId].includes(Species.PALDEA_TAUROS)) {
@@ -5705,7 +5713,7 @@ export function initMoves() {
       .unimplemented(),
     new AttackMove(Moves.REVELATION_DANCE, Type.NORMAL, MoveCategory.SPECIAL, 90, 100, 15, -1, 0, 7)
       .danceMove()
-      .partial(),
+      .attr(RevelationDanceTypeAttr),
     new AttackMove(Moves.CORE_ENFORCER, Type.DRAGON, MoveCategory.SPECIAL, 100, 100, 10, -1, 0, 7)
       .target(MoveTarget.ALL_NEAR_ENEMIES)
       .partial(),
