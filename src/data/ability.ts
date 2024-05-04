@@ -1368,6 +1368,28 @@ export class PostSummonAllyHealAbAttr extends PostSummonAbAttr {
   }
 }
 
+export class PostSummonClearAllyStatsAbAttr extends PostSummonAbAttr {
+
+  constructor() {
+    super();
+  }
+
+  applyPostSummon(pokemon: Pokemon, passive: boolean, args: any[]): boolean {
+    const target = pokemon.getAlly();
+    if (target?.isActive(true)) {
+
+      for (let s = 0; s < target.summonData.battleStats.length; s++)
+        target.summonData.battleStats[s] = 0;
+
+      target.scene.queueMessage(getPokemonMessage(target, `'s stat changes\nwere eliminated!`));
+
+      return true;
+    }
+    
+    return false;
+  }
+}
+
 export class DownloadAbAttr extends PostSummonAbAttr {
   private enemyDef: integer;
   private enemySpDef: integer;
@@ -3381,8 +3403,8 @@ export function initAbilities() {
       .unimplemented(),
     new Ability(Abilities.UNSEEN_FIST, 8)
       .unimplemented(),
-    new Ability(Abilities.CURIOUS_MEDICINE, 8)
-      .unimplemented(),
+    new Ability(Abilities.CURIOUS_MEDICINE, "Curious Medicine", "When the Pokémon enters a battle, it scatters medicine from its shell, which removes all stat changes from allies.", 8)
+      .attr(PostSummonClearAllyStatsAbAttr),
     new Ability(Abilities.TRANSISTOR, 8)
       .attr(MoveTypePowerBoostAbAttr, Type.ELECTRIC),
     new Ability(Abilities.DRAGONS_MAW, 8)
@@ -3508,8 +3530,8 @@ export function initAbilities() {
     new Ability(Abilities.MINDS_EYE, 9)
       .ignorable()
       .unimplemented(),
-    new Ability(Abilities.SUPERSWEET_SYRUP, 9)
-      .unimplemented(),
+    new Ability(Abilities.SUPERSWEET_SYRUP, "Supersweet Syrup", "A sickly sweet scent spreads across the field the first time the Pokémon enters a battle, lowering the evasiveness of opposing Pokémon.", 9)
+        .attr(PostSummonStatChangeAbAttr, BattleStat.EVA, -1, false),
     new Ability(Abilities.HOSPITALITY, 9)
       .attr(PostSummonAllyHealAbAttr, 4, true),
     new Ability(Abilities.TOXIC_CHAIN, 9)
