@@ -67,6 +67,12 @@ import { tutorial as frTutorial } from '../locales/fr/tutorial';
 import { tutorial as itTutorial} from '../locales/it/tutorial';
 import { tutorial as deTutorial } from '../locales/de/tutorial';
 
+import { egg as enEgg } from '../locales/en/egg';
+import { egg as esEgg } from '../locales/es/egg';
+import { egg as frEgg } from '../locales/fr/egg';
+import { egg as itEgg } from '../locales/it/egg';
+import { egg as deEgg } from '../locales/de/egg';
+
 export interface SimpleTranslationEntries {
   [key: string]: string
 }
@@ -136,6 +142,7 @@ export function initI18n(): void {
         commandUiHandler: enCommandUiHandler,
         fightUiHandler: enFightUiHandler,
         tutorial: enTutorial,
+        egg: enEgg,
       },
       es: {
         menu: esMenu,
@@ -149,6 +156,7 @@ export function initI18n(): void {
         commandUiHandler: esCommandUiHandler,
         fightUiHandler: esFightUiHandler,
         tutorial: esTutorial,
+        egg: esEgg,
       },
       fr: {
         menu: frMenu,
@@ -162,6 +170,7 @@ export function initI18n(): void {
         commandUiHandler: frCommandUiHandler,
         fightUiHandler: frFightUiHandler,
         tutorial: frTutorial,
+        egg: frEgg,
       },
       it: {
         menu: itMenu,
@@ -175,6 +184,7 @@ export function initI18n(): void {
         commandUiHandler: itCommandUiHandler,
         fightUiHandler: itFightUiHandler,
         tutorial: itTutorial,
+        egg: itEgg,
       },
       de: {
         menu: deMenu,
@@ -188,6 +198,7 @@ export function initI18n(): void {
         commandUiHandler: deCommandUiHandler,
         fightUiHandler: deFightUiHandler,
         tutorial: deTutorial,
+        egg: deEgg,
       }
     },
   });
