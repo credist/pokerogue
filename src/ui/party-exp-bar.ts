@@ -29,7 +29,7 @@ export default class PartyExpBar extends Phaser.GameObjects.Container {
     this.shown = false;
   }
 
-  showPokemonExp(pokemon: Pokemon, expValue: integer): Promise<void> {
+  showPokemonExp(pokemon: Pokemon, expValue: integer, showOnlyLevelUp: boolean, newLevel: number): Promise<void> {
     return new Promise<void>(resolve => {
       if (this.shown)
         return resolve();
@@ -39,7 +39,15 @@ export default class PartyExpBar extends Phaser.GameObjects.Container {
       
       this.add(this.pokemonIcon);
 
-      this.expText.setText(`+${expValue.toString()}`);
+      if (showOnlyLevelUp) {
+        if (newLevel > 200) {
+          this.expText.setText('Lv. UP');
+        } else {
+          this.expText.setText(`Lv. UP : ${newLevel.toString()}`);
+        }
+      } else {
+        this.expText.setText(`+${expValue.toString()}`);
+      }
 
       this.bg.width = this.expText.displayWidth + 28;
 
